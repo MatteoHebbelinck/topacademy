@@ -94,7 +94,12 @@
   &__title {
     margin-bottom: 10px;
     @include main-title-font;
-    color: #D4AF37; // goud
+    color: #e1b217; // goud
+
+  .hero__title p,
+.hero__title span {
+  color: #d4af37 !important;
+}
     
 
     &--no-media {
