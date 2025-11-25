@@ -36,7 +36,7 @@
     // Overschrijft de font-family van de mixin met een 'normaal' lettertype
     font-family: Arial, Helvetica, sans-serif;
     // Zet de kleur op oranje-geel (moet gedefinieerd zijn in colors.scss)
-    color: $color-frit-orange-yellow; 
+    color: $color-frit-yellow-normal; 
     /* --- EIND AANGEPASTE STIJLEN --- */
 
     &--no-media {
@@ -71,7 +71,7 @@
     // Overschrijft de font-family van de mixin met een 'normaal' lettertype
     font-family: Arial, Helvetica, sans-serif;
     // Zet de kleur op oranje-geel (moet gedefinieerd zijn in colors.scss)
-    color: $color-frit-orange-yellow; 
+    color: $color-frit-yellow-normal; 
     /* --- EIND AANGEPASTE STIJLEN --- */
 
     &--no-media {
