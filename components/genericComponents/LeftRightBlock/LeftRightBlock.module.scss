@@ -103,7 +103,7 @@
 
     &--highlighted-green {
       @extend .highlighted-content__large-text;
-      @include huge-text-font($color-green-normal);
+      @include huge-text-font(#00aa55);
 
       &--with-navigator {
         @extend .highlighted-content__large-text--highlighted-green;
@@ -114,7 +114,7 @@
 
     &--highlighted-blue {
       @extend .highlighted-content__large-text;
-      @include huge-text-font($color-blue-normal);
+      @include huge-text-font(#00aa55);
 
       &--with-navigator {
         @extend .highlighted-content__large-text--highlighted-blue;
@@ -125,7 +125,7 @@
 
     &--highlighted-red {
       @extend .highlighted-content__large-text;
-      @include huge-text-font($color-red-normal);
+      @include huge-text-font(#00aa55);
 
       &--with-navigator {
         @extend .highlighted-content__large-text--highlighted-red;
@@ -136,18 +136,18 @@
 
     &--highlighted-purple {
       @extend .highlighted-content__large-text;
-      @include huge-text-font($color-purple-normal);
+      @include huge-text-font(#00aa55);
 
       &--with-navigator {
         @extend .highlighted-content__large-text--highlighted-purple;
         margin-bottom: 0;
-        @include larger-text-font($color-purple-normal);
+        @include larger-text-font($color-blue-normal);
       }
     }
 
     &--highlighted-yellow {
       @extend .highlighted-content__large-text;
-      @include huge-text-font($color-yellow-normal);
+      @include huge-text-font(#00aa55);
 
       &--with-navigator {
         @extend .highlighted-content__large-text--highlighted-yellow;
