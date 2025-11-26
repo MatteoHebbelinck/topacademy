@@ -6,7 +6,7 @@
    ------------------------------------------------------- */
 
 .highlighted-content__title {
-  @include title-font($color-yellow-normal); // Silkscreen, groot
+  @include main-title-font($color-blue-normal); // Silkscreen, groot
 
   /* OVERRIDES zodat het beter overeenkomt met je screenshot */
   font-size: 42px !important;
