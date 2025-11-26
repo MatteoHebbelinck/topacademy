@@ -16,6 +16,7 @@ export default function Page({ story, preview, socialtags, menu }) {
         "person.colorcode",
         "product.colorcode",
         "location.colorcode",
+        "contact.colorcode",
         "artist.songs",
         "song.artist",
         "list.elements"
@@ -46,6 +47,7 @@ export async function getStaticProps({ params }) {
       "person.colorcode",
       "product.colorcode",
       "location.colorcode",
+      "contact.colorcode",
       "artist.songs",
       "song.artist",
       "list.elements"
