@@ -16,7 +16,7 @@ import Menulink from '../components/genericComponents/Menulink/Menulink';
 import Paragraph from '../components/genericComponents/Paragraph/Paragraph';
 import Intro from '../components/genericComponents/Intro/Intro';
 import LeftRightBlock from '../components/genericComponents/LeftRightBlock/LeftRightBlock';
-import Course from '../components/specificComponents/Course/Course';
+import Course from '../components/specificComponents/Snack/Snack';
 import List from '../components/genericComponents/List/List';
 import Element from '../components/genericComponents/Element/Element';
 import OneCol from '../components/layoutComponents/OneCol/OneCol';
