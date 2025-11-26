@@ -3,23 +3,26 @@ import HeadComponent from "../components/technicalComponents/HeadComponent/HeadC
 import { getTags } from "../functions/services/metaTagService";
 
 export default function Page({ story, preview, socialtags, menu }) {
-  story = useStoryblokState(story, { //Hook that connects the current page to the Storyblok Real Time visual editor. Needs information about the relations in order for the relations to be editable as well.
-    resolveRelations: [
-      "hero.colorcode",
-      "leftrightblock.colorcode",
-      "course.colorcode",
-      "artist.colorcode",
-      "song.colorcode",
-      "person.colorcode",
-      "product.colorcode",
-      "location.colorcode",
-      "artist.songs",
-      "song.artist",
-      "course.teachers",
-      "course.products",
-      "list.elements"
-    ]
-  }, preview);
+
+  story = useStoryblokState(
+    story,
+    {
+      resolveRelations: [
+        "hero.colorcode",
+        "leftrightblock.colorcode",
+        "snack.colorcode",       // ← BELANGRIJK: course → snack
+        "artist.colorcode",
+        "song.colorcode",
+        "person.colorcode",
+        "product.colorcode",
+        "location.colorcode",
+        "artist.songs",
+        "song.artist",
+        "list.elements"
+      ]
+    },
+    preview
+  );
 
   return (
     <>
@@ -29,16 +32,15 @@ export default function Page({ story, preview, socialtags, menu }) {
   );
 }
 
-
 export async function getStaticProps({ params }) {
   let slug = params.slug ? params.slug.join("/") : "home";
 
   let sbParams = {
-    version: "draft", // 'draft' or 'published'
+    version: "draft",
     resolve_relations: [
       "hero.colorcode",
       "leftrightblock.colorcode",
-      "course.colorcode",
+      "snack.colorcode",    // ← HIER OOK
       "artist.colorcode",
       "song.colorcode",
       "person.colorcode",
@@ -46,8 +48,6 @@ export async function getStaticProps({ params }) {
       "location.colorcode",
       "artist.songs",
       "song.artist",
-      "course.teachers",
-      "course.products",
       "list.elements"
     ]
   };
@@ -55,36 +55,34 @@ export async function getStaticProps({ params }) {
   const storyblokApi = getStoryblokApi();
 
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
-  if (!data) {
-    return {
-      notFound: true,
-    }
-  }
 
-  //getting menu data needed throughout the site
+  if (!data) return { notFound: true };
+
+  // menu ophalen
   let menudata = await storyblokApi.get(`cdn/stories/reusable/headermenu`, sbParams);
-  if (!menudata) {
-    return {
-      notFound: true,
-    }
-  }
+  if (!menudata) return { notFound: true };
+
   const menu = menudata.data.story;
 
   const title = data.story.name;
-  const description = data.story.content.tagline ? data.story.content.tagline : `${title}`;
+  const description =
+    data.story.content.tagline
+      ? data.story.content.tagline
+      : `${title}`;
+
   const socialtags = getTags({
     storyblokSocialTag: data.story.content.socialtag,
     pageDefaults: {
       "og:title": title,
       "og:description": description,
-      "og:url": `${process.env.NEXT_PUBLIC_DEPLOY_URL}` + slug
-    }
+      "og:url": `${process.env.NEXT_PUBLIC_DEPLOY_URL}${slug}`,
+    },
   });
 
   return {
     props: {
-      story: data ? data.story : false,
-      key: data ? data.story.id : false,
+      story: data.story,
+      key: data.story.id,
       socialtags,
       menu
     },
@@ -94,14 +92,12 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   const storyblokApi = getStoryblokApi();
-
   let { data } = await storyblokApi.get("cdn/links/");
 
   let paths = [];
+
   Object.keys(data.links).forEach((linkKey) => {
-    if (data.links[linkKey].is_folder) {
-      return;
-    }
+    if (data.links[linkKey].is_folder) return;
 
     const slug = data.links[linkKey].slug;
     let splittedSlug = slug.split("/");
@@ -110,7 +106,7 @@ export async function getStaticPaths() {
   });
 
   return {
-    paths: paths,
-    fallback: 'blocking'
+    paths,
+    fallback: "blocking",
   };
 }
