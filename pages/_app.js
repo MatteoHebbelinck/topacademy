@@ -27,6 +27,8 @@ import Page from "../components/layoutComponents/Page/Page";
 import OneCol from "../components/layoutComponents/OneCol/OneCol";
 import TwoCol from "../components/layoutComponents/TwoCol/TwoCol";
 import ThreeCol from "../components/layoutComponents/ThreeCol/ThreeCol";
+import Teaser from "../components/layoutComponents/Teaser/Teaser";
+
 
 // Remaining specific components
 import Product from "../components/specificComponents/Product/Product";
@@ -59,6 +61,7 @@ const components = {
   onecol: OneCol,
   twocol: TwoCol,
   threecol: ThreeCol,
+  teaser: Teaser,
 
   // other specific
   product: Product,
