@@ -28,7 +28,7 @@ import OneCol from "../components/layoutComponents/OneCol/OneCol";
 import TwoCol from "../components/layoutComponents/TwoCol/TwoCol";
 import ThreeCol from "../components/layoutComponents/ThreeCol/ThreeCol";
 import Teaser from "../components/layoutComponents/Teaser/Teaser";
-import Colorcode from "../components/layoutComponents/Colorcode";
+import Colorcode from "../components/layoutComponents/Colorcode/Colorcode";
 
 
 // Remaining specific components
