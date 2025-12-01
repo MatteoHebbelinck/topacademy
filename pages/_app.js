@@ -21,7 +21,7 @@ import LeftRightBlock from "../components/genericComponents/LeftRightBlock/LeftR
 import List from "../components/genericComponents/List/List";
 import Element from "../components/genericComponents/Element/Element";
 import ImageCarousel from "../components/genericComponents/ImageCarousel/ImageCarousel";
-import ImageWithText from "@/components/genericComponents/ImageWithText/ImageWithText";
+import ImageWithText from "../components/genericComponents/ImageWithText/ImageWithText";
 
 // Layout components
 import Page from "../components/layoutComponents/Page/Page";
