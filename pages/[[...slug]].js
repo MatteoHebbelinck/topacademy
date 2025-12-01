@@ -10,12 +10,10 @@ export default function Page({ story, preview, socialtags, menu }) {
         "hero.colorcode",
         "leftrightblock.colorcode",
 
-        // SNACK STRUCTURE
         "snack.colorcode",
         "snackcatalog.snackcategories",
         "snackcategory.snacks",
 
-        // OTHER
         "artist.colorcode",
         "song.colorcode",
         "person.colorcode",
@@ -33,13 +31,14 @@ export default function Page({ story, preview, socialtags, menu }) {
   return (
     <>
       <HeadComponent socialTags={socialtags} />
-      <StoryblokComponent menu={menu} blok={story.content} />
+      <StoryblokComponent menu={menu} blok={story?.content} />
     </>
   );
 }
 
 export async function getStaticProps({ params }) {
-  let slug = params.slug ? params.slug.join("/") : "home";
+  const slug = params.slug ? params.slug.join("/") : "home";
+  const storyblokApi = getStoryblokApi();
 
   const sbParams = {
     version: "draft",
@@ -63,16 +62,26 @@ export async function getStaticProps({ params }) {
     ]
   };
 
-  const storyblokApi = getStoryblokApi();
-  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
+  // ✅ SAFE fetch met try/catch
+  let data = null;
+  try {
+    const res = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
+    data = res.data;
+  } catch (err) {
+    // ❗ BELANGRIJK: geef een 404 terug, geen crash
+    return { notFound: true };
+  }
 
-  if (!data) return { notFound: true };
+  // fetch menu (zelfde safe pattern)
+  let menudata = null;
+  try {
+    const resMenu = await storyblokApi.get("cdn/stories/reusable/headermenu", sbParams);
+    menudata = resMenu.data;
+  } catch (err) {
+    return { notFound: true };
+  }
 
-  let menudata = await storyblokApi.get(`cdn/stories/reusable/headermenu`, sbParams);
-
-  if (!menudata) return { notFound: true };
-
-  const menu = menudata.data.story;
+  const menu = menudata.story;
 
   const title = data.story.name;
   const description = data.story.content.tagline ?? `${title}`;
@@ -101,25 +110,23 @@ export async function getStaticPaths() {
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get("cdn/links/");
 
-  let paths = [];
+  const paths = [];
 
   Object.keys(data.links).forEach((key) => {
     const link = data.links[key];
 
-    // ⛔ NIET MEER RETURNEN als het een folder is
-    // Storyblok categories worden soms fout als folder gemarkeerd
+    // ❌ Skip folders (geen story)
+    if (link.is_folder) return;
 
-    // ✔️ Skip alleen systeem dingen zoals "home" map zelf
+    // ❌ Skip reusable menu
     if (link.slug.startsWith("reusable")) return;
 
-    // ✔️ Bouw alleen paths voor echte stories (geen asset, geen root)
+    // ❌ Skip lege slugs
     if (!link.slug || link.slug === "") return;
-
-    const slugArray = link.slug.split("/");
 
     paths.push({
       params: {
-        slug: slugArray
+        slug: link.slug.split("/")
       }
     });
   });
