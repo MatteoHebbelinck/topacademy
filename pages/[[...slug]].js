@@ -13,6 +13,7 @@ export default function Page({ story, preview, socialtags, menu }) {
         "snack.colorcode",
         "snackcatalog.snackcategories",
         "snackcategory.snacks",
+        "contact.colorcode",
 
         "artist.colorcode",
         "song.colorcode",
@@ -49,6 +50,7 @@ export async function getStaticProps({ params }) {
       "snack.colorcode",
       "snackcatalog.snackcategories",
       "snackcategory.snacks",
+      "contact.colorcode",
 
       "artist.colorcode",
       "song.colorcode",
