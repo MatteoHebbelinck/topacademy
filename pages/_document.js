@@ -13,7 +13,7 @@ export default function Document() {
         {/* Google Analytics (GA4) */}
         <script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-2REL1LFX4N"
+          src="https://www.googletagmanager.com/gtag/js?id=G-7ZRZEJDQRR"
         ></script>
 
         <script
@@ -22,7 +22,7 @@ export default function Document() {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-2REL1LFX4N', {
+              gtag('config', 'G-7ZRZEJDQRR', {
                 page_path: window.location.pathname,
               });
             `,
