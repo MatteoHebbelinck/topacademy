@@ -21,6 +21,7 @@ import LeftRightBlock from "../components/genericComponents/LeftRightBlock/LeftR
 import List from "../components/genericComponents/List/List";
 import Element from "../components/genericComponents/Element/Element";
 import ImageCarousel from "../components/genericComponents/ImageCarousel/ImageCarousel";
+import ImageWithText from "@/components/genericComponents/ImageWithText/ImageWithText";
 
 // Layout components
 import Page from "../components/layoutComponents/Page/Page";
@@ -29,6 +30,7 @@ import TwoCol from "../components/layoutComponents/TwoCol/TwoCol";
 import ThreeCol from "../components/layoutComponents/ThreeCol/ThreeCol";
 import Teaser from "../components/layoutComponents/Teaser/Teaser";
 import Colorcode from "../components/layoutComponents/Colorcode/Colorcode";
+
 
 
 // Remaining specific components
@@ -56,6 +58,7 @@ const components = {
   list: List,
   element: Element,
   imagecarousel: ImageCarousel,
+  imagewithtext: ImageWithText,
 
   // layout
   page: Page,
@@ -63,6 +66,8 @@ const components = {
   twocol: TwoCol,
   threecol: ThreeCol,
   teaser: Teaser,
+  colorcode: Colorcode,
+  
 
   // other specific
   product: Product,

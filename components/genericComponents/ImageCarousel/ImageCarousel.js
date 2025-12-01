@@ -1,8 +1,8 @@
 ﻿import React, { Component } from "react";
 import css from "./ImageCarousel.module.scss";
 import PropTypes from "prop-types";
-import { storyblokEditable } from "@storyblok/react";
-import {RichTextToHTML} from "../../../functions/storyBlokRichTextRenderer";
+import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
+import { RichTextToHTML } from "../../../functions/storyBlokRichTextRenderer";
 
 export default class ImageCarousel extends Component {
     learningTargetsContainer;
@@ -14,7 +14,7 @@ export default class ImageCarousel extends Component {
             pos: { top: 0, left: 0, x: 0, y: 0 },
             showLeftArrow: false,
             showRightArrow: true
-        }
+        };
 
         this.mouseDownHandler = this.mouseDownHandler.bind(this);
         this.mouseMoveHandler = this.mouseMoveHandler.bind(this);
@@ -54,7 +54,7 @@ export default class ImageCarousel extends Component {
         e.preventDefault();
 
         document.removeEventListener("mousemove", this.mouseMoveHandler);
-        // check new position to update arrows -> can maybe be refactored
+
         const cardWidth = this.learningTargetsContainer.children[0].getBoundingClientRect().width;
         const newPosition = this.learningTargetsContainer.scrollLeft;
         const cardMarginRight = Number(window.getComputedStyle(this.learningTargetsContainer.children[0]).marginRight.replace("px", ""));
@@ -66,20 +66,24 @@ export default class ImageCarousel extends Component {
         const currentPosition = this.learningTargetsContainer.scrollLeft;
         const cardMarginRight = Number(window.getComputedStyle(this.learningTargetsContainer.children[0]).marginRight.replace("px", ""));
         const scrollInterval = cardWidth + cardMarginRight;
-        const newPosition = invertDirection ? Math.ceil((currentPosition - scrollInterval) / scrollInterval) * scrollInterval : Math.floor((currentPosition + scrollInterval) / scrollInterval) * scrollInterval;
+
+        const newPosition = invertDirection
+            ? Math.ceil((currentPosition - scrollInterval) / scrollInterval) * scrollInterval
+            : Math.floor((currentPosition + scrollInterval) / scrollInterval) * scrollInterval;
 
         this.learningTargetsContainer.scroll({
             left: newPosition,
             top: 0,
             behavior: "smooth"
         });
+
         this.checkDisplayedArrows(newPosition, scrollInterval);
     }
 
     checkDisplayedArrows(newPosition, scrollInterval) {
         if (document.body.clientWidth < 800) return;
-        this.setState({ showLeftArrow: (newPosition !== 0) });
-        this.setState({ showRightArrow: (newPosition + scrollInterval < this.learningTargetsContainer.scrollWidth) });
+        this.setState({ showLeftArrow: newPosition !== 0 });
+        this.setState({ showRightArrow: newPosition + scrollInterval < this.learningTargetsContainer.scrollWidth });
     }
 
     componentDidMount() {
@@ -91,45 +95,55 @@ export default class ImageCarousel extends Component {
 
     render() {
         return (
-            <>
-                <section  {...storyblokEditable(this.props.blok)} className={css["imagecarouselwrapper"]}>
-                    <h2 className={css["imagecarouselwrapper__title"]}>{this.props.blok.title}</h2>
-                    {RichTextToHTML({document: this.props.blok.intro, textClassName: css["imagecarouselwrapper__subtitle"], linkClassName:["imagecarousel__emphmail"]})}
-                    <div className={css["image-carousel__images-container"]}>
-                        <ul id={"image-carousel__images"} className={css["image-carousel__images"]} onMouseDown={this.mouseDownHandler}>
-                            {this.props.blok.images.map((imt, i) =>
-                                <li className={css["image-carousel__image-container"]} key={imt._uid}>
-                                    <img className={css["image-carousel__image"]} src={imt.image.filename} alt={imt.image.alt} />
-                                </li>)}
-                        </ul>
-                        {(this.state.showLeftArrow) && <span
+            <section {...storyblokEditable(this.props.blok)} className={css["imagecarouselwrapper"]}>
+                <h2 className={css["imagecarouselwrapper__title"]}>{this.props.blok.title}</h2>
+
+                {RichTextToHTML({
+                    document: this.props.blok.intro,
+                    textClassName: css["imagecarouselwrapper__subtitle"],
+                    linkClassName: ["imagecarousel__emphmail"]
+                })}
+
+                <div className={css["image-carousel__images-container"]}>
+                    <ul
+                        id="image-carousel__images"
+                        className={css["image-carousel__images"]}
+                        onMouseDown={this.mouseDownHandler}
+                    >
+                        {this.props.blok.images.map((child) => (
+                            <li className={css["image-carousel__image-container"]} key={child._uid}>
+                                <StoryblokComponent blok={child} />
+                            </li>
+                        ))}
+                    </ul>
+
+                    {this.state.showLeftArrow && (
+                        <span
                             className={["mdi", "mdi-arrow-left", css["image-carousel__arrow-left"]].join(" ")}
                             role="button"
                             tabIndex={-1}
-                            onKeyPress={() => this.scrollCarousel(true)}
                             onClick={() => this.scrollCarousel(true)}
-                        />}
-                        {(this.state.showRightArrow) && <span
+                        />
+                    )}
+
+                    {this.state.showRightArrow && (
+                        <span
                             className={["mdi", "mdi-arrow-right", css["image-carousel__arrow-right"]].join(" ")}
                             role="button"
                             tabIndex={0}
-                            onKeyPress={() => this.scrollCarousel(false)}
                             onClick={() => this.scrollCarousel(false)}
-                        />}
-                    </div>
-                </section>
-            </>
+                        />
+                    )}
+                </div>
+            </section>
         );
     }
 }
 
 ImageCarousel.propTypes = {
-    imagesWithText: PropTypes.arrayOf(PropTypes.shape({
-        _uid: PropTypes.string,
-        image: PropTypes.shape({
-            filename: PropTypes.string,
-            alt: PropTypes.string
-        }),
-        description: PropTypes.string
-    }))
+    blok: PropTypes.shape({
+        title: PropTypes.string,
+        intro: PropTypes.object,
+        images: PropTypes.arrayOf(PropTypes.object) // Storyblok blokken
+    })
 };
