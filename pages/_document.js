@@ -4,30 +4,17 @@ export default function Document() {
   return (
     <Html>
       <Head>
+        {/* Contentsquare */}
         <script
           src="https://t.contentsquare.net/uxa/c0cc4db739acd.js"
           async
         ></script>
-      </Head>
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  );
-}
-// /pages/_document.js
-import { Html, Head, Main, NextScript } from 'next/document';
 
-export default function Document() {
-  return (
-    <Html lang="nl">
-      <Head>
-        {/* Google tag (gtag.js) */}
+        {/* Google Analytics (GA4) */}
         <script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-2RELL1FX4N"
-        />
+          src="https://www.googletagmanager.com/gtag/js?id=G-2REL1LFX4N"
+        ></script>
 
         <script
           dangerouslySetInnerHTML={{
@@ -35,11 +22,14 @@ export default function Document() {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-2RELL1FX4N');
+              gtag('config', 'G-2REL1LFX4N', {
+                page_path: window.location.pathname,
+              });
             `,
           }}
         />
       </Head>
+
       <body>
         <Main />
         <NextScript />
