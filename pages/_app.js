@@ -43,7 +43,7 @@ import Contact from "../components/specificComponents/Contact/Contact";
 const components = {
   // specific
   person: Person,
-  teacher: Teacher,
+  teachers: Teacher,
   experience: Experience,
   snack: Snack,
   snackcategory: SnackCategory,     // ← Storyblok component "snackcategory"
