@@ -12,12 +12,13 @@
     grid-template-columns: 230px auto;
   }
   
-  &__nav-home {
+    &__nav-home {
     width: 230px;
     align-self: center;
-    cursor: pointer;
     margin-left: 20px;
+    pointer-events: none;   // <-- dit blok vangt geen klikken meer
   }
+
   
   &__nav-home-container {
     display: flex;
@@ -35,15 +36,18 @@
     }
   }
   
-  &__nav-home-logo {
+    &__nav-home-logo {
     display: none;
-    height: 41px;
+    height: 95px;
+    pointer-events: auto;   // <-- logo wél klikbaar
+    cursor: pointer;
     
     &--mobile {
       @extend .main-header__nav-home-logo;
       display: block;
     }
   }
+
   
   &__nav-list {
     display: grid;
