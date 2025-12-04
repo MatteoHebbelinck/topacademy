@@ -9,7 +9,7 @@ import Person from "../components/specificComponents/Person/Person";
 import Teacher from "../components/specificComponents/Teacher/Teacher";
 import Experience from "../components/specificComponents/Experience/Experience";
 import Snack from "../components/specificComponents/Snack/Snack";
-import SnackCategory from "../components/specificComponents/SnackCategory/SnackCategory"; // ← deze MOET bestaan
+import SnackCategory from "../components/specificComponents/SnackCategory/SnackCategory";
 
 // Generic Components
 import Hero from "../components/genericComponents/Hero/Hero";
@@ -22,6 +22,7 @@ import List from "../components/genericComponents/List/List";
 import Element from "../components/genericComponents/Element/Element";
 import ImageCarousel from "../components/genericComponents/ImageCarousel/ImageCarousel";
 import ImageWithText from "../components/genericComponents/ImageWithText/ImageWithText";
+import Footer from "../components/genericComponents/Footer/Footer";
 
 // Layout components
 import Page from "../components/layoutComponents/Page/Page";
@@ -30,8 +31,6 @@ import TwoCol from "../components/layoutComponents/TwoCol/TwoCol";
 import ThreeCol from "../components/layoutComponents/ThreeCol/ThreeCol";
 import Teaser from "../components/layoutComponents/Teaser/Teaser";
 import Colorcode from "../components/layoutComponents/Colorcode/Colorcode";
-
-
 
 // Remaining specific components
 import Product from "../components/specificComponents/Product/Product";
@@ -46,7 +45,7 @@ const components = {
   teachers: Teacher,
   experience: Experience,
   snack: Snack,
-  snackcategory: SnackCategory,     // ← Storyblok component "snackcategory"
+  snackcategory: SnackCategory,
 
   // generic
   hero: Hero,
@@ -59,6 +58,7 @@ const components = {
   element: Element,
   imagecarousel: ImageCarousel,
   imagewithtext: ImageWithText,
+  footer: Footer,
 
   // layout
   page: Page,
@@ -67,7 +67,6 @@ const components = {
   threecol: ThreeCol,
   teaser: Teaser,
   colorcode: Colorcode,
-  
 
   // other specific
   product: Product,
@@ -92,7 +91,13 @@ function MyApp({ Component, pageProps }) {
     return () => router.events.off("routeChangeComplete", handleRouteChange);
   }, [router.events]);
 
-  return <Component {...pageProps} />;
+  // ⭐⭐⭐ DIT IS DE AANGEPASTE RETURN ⭐⭐⭐
+  return (
+    <>
+      <Component {...pageProps} />
+      <Footer />
+    </>
+  );
 }
 
 export default MyApp;
