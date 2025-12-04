@@ -73,6 +73,11 @@ export default class Location extends Component {
             blok.additionalstuff.map((nestedBlok) => (
               <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
             ))}
+            {blok.bottombloks &&
+              blok.bottombloks.map((nestedBlok) => (
+              <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
+    ))}
+
         </main>
       </div>
     );
