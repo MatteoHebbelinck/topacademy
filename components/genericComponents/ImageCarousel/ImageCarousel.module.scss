@@ -249,7 +249,7 @@
   &__title {
     margin-bottom: 25px;
     margin-right: 17px;
-    @include main-title-font;
+    @include main-title-font(white);
   }
   
   &__subtitle {
