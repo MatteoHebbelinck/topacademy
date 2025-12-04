@@ -55,7 +55,10 @@ export default class Location extends Component {
 
             {/* ✅ GOOGLE MAP sectie die beide methodes ondersteunt */}
             {embedUrl && (
-              <div className={css["location-page__map"]} style={{ marginTop: "40px", textAlign: "center" }}>
+              <div
+                className={css["location-page__map"]}
+                style={{ marginTop: "40px", textAlign: "center" }}
+              >
                 <iframe
                   src={embedUrl}
                   width="100%"
@@ -69,10 +72,12 @@ export default class Location extends Component {
             )}
           </div>
 
-          {blok.additionalstuff &&
-            blok.additionalstuff.map((nestedBlok) => (
+          {/* ✅ Render ALL Storyblok body blocks (zoals 'list') */}
+          {blok.body &&
+            blok.body.map((nestedBlok) => (
               <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
             ))}
+
             {blok.bottombloks &&
               blok.bottombloks.map((nestedBlok) => (
               <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
