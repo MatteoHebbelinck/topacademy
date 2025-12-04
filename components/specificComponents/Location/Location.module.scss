@@ -90,9 +90,14 @@
   }
 
   &__title {
-    margin-bottom: 20px;
-    @include title-font;
-  }
+  margin-bottom: 24px;
+  font-family: "Poppins", sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+}
+
 }
 
 

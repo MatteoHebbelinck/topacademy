@@ -73,16 +73,17 @@ export default class Location extends Component {
           </div>
 
           {/* ✅ Render ALL Storyblok body blocks (zoals 'list') */}
+          {blok.bottombloks &&
+              blok.bottombloks.map((nestedBlok) => (
+              <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
+         ))}
+          
           {blok.body &&
             blok.body.map((nestedBlok) => (
               <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
             ))}
 
-            {blok.bottombloks &&
-              blok.bottombloks.map((nestedBlok) => (
-              <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
-    ))}
-
+            
         </main>
       </div>
     );

@@ -13,22 +13,38 @@
 }
 
 .list__items {
-  list-style: disc;        // ⭐ bullets
-  padding-left: 20px;      // ruimte voor bullets
+  list-style: none;
+  padding: 0;
   margin: 0 auto;
-  width: fit-content;
-  text-align: left;        // bullets moeten links uitlijnen
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-.list__item + .list__item {
-  margin-top: 8px;
+.list__item {
+  background: rgba(0, 0, 0, 0.05);      // lichtgrijze transparantie
+  padding: 14px 20px;
+  border-radius: 14px;                  // afgeronde hoeken
+  backdrop-filter: blur(4px);           // moderne “frosted” look
+  transition: 0.25s ease;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  }
 }
 
 .list__link {
   @include slightly-larger-text-font($color-grey-normal);
+  font-size: 20px;
   text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
+  width: 100%;              // maakt hele balk klikbaar
+  display: block;
 }
