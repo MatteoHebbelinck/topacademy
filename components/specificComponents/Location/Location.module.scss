@@ -200,3 +200,19 @@
     }
   }
 }
+
+/* FULL-WIDTH MAP (mapUrl iframe) */
+.location-page__map {
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  height: 450px; /* pas aan indien nodig */
+  border: none;
+}
+
+/* Breek uit het grid op desktop */
+@media only screen and (min-width: 850px) {
+  .location-page__map {
+    grid-column: 1 / -1 !important;
+  }
+}
