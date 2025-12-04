@@ -218,3 +218,127 @@
 }
 
 
+/* ----------------------------- */
+/* GLOBAL IMPROVED PAGE SPACING */
+/* ----------------------------- */
+
+.location-page {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+@media only screen and (min-width: 900px) {
+  .location-page {
+    padding-top: 60px;
+    padding-bottom: 120px;
+  }
+}
+
+
+/* ----------------------------- */
+/* SECTION TITLES (zoals Boekentoren) */
+/* ----------------------------- */
+
+.location-page__title {
+  font-size: 54px;
+  font-weight: 700;
+  color: #ffb400; /* jouw geel */
+  margin: 0 0 40px 0;
+  line-height: 1.1;
+}
+
+@media only screen and (min-width: 1000px) {
+  .location-page__title {
+    font-size: 70px;
+    margin-bottom: 60px;
+  }
+}
+
+
+/* ----------------------------- */
+/* IMAGE SECTIONS (zoals jouw frituur foto) */
+/* ----------------------------- */
+
+.location-page__image {
+  width: 100%;
+  max-width: 550px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: block;
+  margin: 0 auto 60px auto;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+}
+
+@media only screen and (min-width: 1100px) {
+  .location-page__image {
+    max-width: 650px;
+  }
+}
+
+
+/* ----------------------------- */
+/* TEXT + IMAGE LAYOUT COMBO */
+/* ----------------------------- */
+
+.location-page__content-block {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+  margin: 80px 0;
+}
+
+@media only screen and (min-width: 1100px) {
+  .location-page__content-block {
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+}
+
+
+/* ----------------------------- */
+/* GOOGLE MAP — BETERE WEERGAVE */
+/* ----------------------------- */
+
+.location-page__map {
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  height: 450px;
+  border: none;
+  border-radius: 0;
+  margin-top: 40px;
+  margin-bottom: 80px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+@media only screen and (min-width: 850px) {
+  .location-page__map {
+    grid-column: 1 / -1 !important;
+    height: 520px;
+  }
+}
+
+
+/* ----------------------------- */
+/* RICH TEXT OPTIMALISATIES */
+/* ----------------------------- */
+
+.rich-text-section {
+  line-height: 1.75;
+  font-size: 18px;
+  color: #333;
+}
+
+@media only screen and (min-width: 900px) {
+  .rich-text-section {
+    font-size: 20px;
+  }
+}
+
+.rich-text-section__title {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.2;
+  color: #111;
+}
