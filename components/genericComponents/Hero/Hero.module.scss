@@ -17,23 +17,37 @@
   background-repeat: no-repeat;
 
   padding: 6rem 3rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom right,
+      rgba(0, 0, 0, 0.45),
+      rgba(0, 0, 0, 0.25)
+    );
+    z-index: 1;
+  }
 }
 
 /* -----------------------------
-   GLASS TEXT PANEL (zoals voorbeeld)
+   GLASS TEXT PANEL
 ----------------------------- */
 .glassPanel {
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  z-index: 2;
 
-  border-radius: 14px;
-  padding: 2.5rem 2rem;
+  background: rgba(110, 100, 100, 0.45);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 
+  border-radius: 16px;
+  padding: 2.8rem 2.3rem;
   max-width: 650px;
 
-  color: white;
-  z-index: 2;
+
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
 
   opacity: 0;
   animation: fadeIn 1s ease-out forwards;
@@ -43,11 +57,13 @@
    TYPOGRAPHY
 ----------------------------- */
 
+$heroText: #F6E7C1;
+
 .supertitle {
-  letter-spacing: 0.35rem;
-  font-size: 3rem;
-  margin-bottom: 0.8rem;
-  opacity: 0.85;
+  color: $heroText;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.45);
+  @include slightly-larger-text-font($heroText);
+  margin-bottom: 0.6rem;
 }
 
 .title {
@@ -56,16 +72,22 @@
   line-height: 1.1;
   margin-bottom: 1.2rem;
 
-  /* maakt tekst leesbaar op lichte foto's */
-  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+  color: $heroText;
+  text-shadow:
+    0 2px 20px rgba(0, 0, 0, 0.35),
+    0 0 25px rgba(0, 0, 0, 0.35);
+
+
+  -webkit-text-stroke: 1px #fbfaf7;
 }
 
 .subtitle {
-  font-size: 1.3rem;
-  line-height: 1.5;
+  font-size: 1.9rem;
   max-width: 520px;
+  font-weight: 600;
 
-  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  color: $heroText;
+  text-shadow: 0 3px 20px rgba(0, 0, 0, 0.35);
 }
 
 /* -----------------------------
@@ -88,7 +110,7 @@
 
 @media (max-width: 900px) {
   .title {
-    font-size: 2.8rem;
+    font-size: 3rem;
   }
   .glassPanel {
     padding: 2rem 2rem;
@@ -100,9 +122,9 @@
     padding: 4rem 1.5rem;
   }
   .title {
-    font-size: 2.2rem;
+    font-size: 2.3rem;
   }
   .subtitle {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
   }
 }
