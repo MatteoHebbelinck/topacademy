@@ -39,6 +39,7 @@ import Artist from "../components/specificComponents/Artist/Artist";
 import Song from "../components/specificComponents/Song/Song";
 import Contact from "../components/specificComponents/Contact/Contact";
 
+
 const components = {
   // specific
   person: Person,
@@ -59,6 +60,7 @@ const components = {
   imagecarousel: ImageCarousel,
   imagewithtext: ImageWithText,
   footer: Footer,
+
 
   // layout
   page: Page,
@@ -91,7 +93,6 @@ function MyApp({ Component, pageProps }) {
     return () => router.events.off("routeChangeComplete", handleRouteChange);
   }, [router.events]);
 
-  // ⭐⭐⭐ DIT IS DE AANGEPASTE RETURN ⭐⭐⭐
   return (
     <>
       <Component {...pageProps} />
